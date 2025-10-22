@@ -93,15 +93,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. CONTACT FORM ---
+    // === ADD THIS ENTIRE NEW SECTION ===
+    // --- 5. CONTACT FORM (AJAX SUBMISSION) ---
     const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Here you would typically send form data to a server
-        // For this demo, we'll just show an alert.
-        alert('Thank you for your message! (This is a demo)');
-        contactForm.reset();
-    });
+    const successMessage = document.getElementById('form-success-message');
+
+    if (contactForm && successMessage) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Stop the default redirect!
+
+            const form = e.target;
+            const data = new FormData(form);
+
+            try {
+                // Send data to Formspree in the background
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json' // Tells Formspree to send JSON back
+                    }
+                });
+
+                if (response.ok) {
+                    // Success!
+                    contactForm.style.display = 'none';    // Hide the form
+                    successMessage.style.display = 'block'; // Show the thank you message
+                    contactForm.reset(); // Clear the form fields
+                } else {
+                    // Handle Formspree or server errors
+                    alert('Oops! There was a problem. Please try again.');
+                }
+            } catch (error) {
+                // Handle network errors
+                console.error('Form submission error:', error);
+                alert('Oops! A network error occurred. Please try again.');
+            }
+        });
+    }
 
 }); // End of DOMContentLoaded Listener
 
