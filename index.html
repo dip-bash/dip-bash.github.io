@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saumyadip Jana | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              bg: '#050505',
+              surface: '#0a0a0a',
+              'surface-hover': '#141414',
+              border: '#1f1f1f',
+              'text-main': '#ededed',
+              'text-muted': '#a3a3a3',
+              accent: '#3b82f6',
+              'accent-purple': '#a855f7',
+              'accent-pink': '#ec4899',
+            },
+            fontFamily: {
+              main: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #050505;
+        color: #ededed;
+        font-family: 'Inter', sans-serif;
+        position: relative;
+        overflow-x: hidden;
+      }
+      
+      /* Subtle colorful background blobs */
+      body::before {
+        content: '';
+        position: fixed;
+        top: -10%;
+        left: -10%;
+        width: 40%;
+        height: 40%;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+        z-index: -1;
+        pointer-events: none;
+      }
+      body::after {
+        content: '';
+        position: fixed;
+        bottom: -10%;
+        right: -10%;
+        width: 50%;
+        height: 50%;
+        background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
+      @keyframes fadeIn { to { opacity: 1; } }
+      
+      .cursor { 
+        display: inline-block; 
+        width: 8px; 
+        background-color: #3b82f6; 
+        animation: blink 1s infinite; 
+        margin-left: 4px; 
+      }
+      @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+      
+      .highlight { 
+        color: #60a5fa; 
+        background: rgba(96, 165, 250, 0.1); 
+        padding: 2px 6px; 
+        border-radius: 4px; 
+        font-size: 0.9em; 
+        font-family: 'JetBrains Mono', monospace; 
+      }
+      
+      .project-card:hover {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.05);
+        border-color: rgba(59, 130, 246, 0.3);
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050505;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1f1f1f;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-CbKc4dxc.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
