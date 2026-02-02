@@ -18,7 +18,6 @@ export const parseMarkdown = (content: string) => {
     const trimLine = line.trim();
     if (!trimLine || trimLine.startsWith('#')) return;
     
-    // Split by the first colon only to separate key and value
     const colonIndex = line.indexOf(':');
     if (colonIndex !== -1) {
       const key = line.substring(0, colonIndex).trim();
@@ -27,16 +26,12 @@ export const parseMarkdown = (content: string) => {
       if (value === '' || value === '[]') {
         data[key] = [];
       } else if (value.startsWith('[') && value.endsWith(']')) {
-        // Handle basic JSON-like array strings
         try {
-          // Attempt to parse as JSON first if it looks like a valid array string
           data[key] = JSON.parse(value);
         } catch (e) {
-          // Fallback to manual split if JSON.parse fails (for non-standard array notation)
           data[key] = value.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, ''));
         }
       } else {
-        // Simple string value, clean up potential quotes
         data[key] = value.replace(/^["']|["']$/g, '');
       }
     }
@@ -47,16 +42,24 @@ export const parseMarkdown = (content: string) => {
 
 /**
  * Fetches content from the local content directory.
+ * Improved for GitHub Pages compatibility.
  */
 export const fetchContent = async (filename: string): Promise<string> => {
+  // Use relative paths to ensure it works on username.github.io/repo-name/
+  const path = `./content/${filename}`;
   try {
-    const response = await fetch(`./content/${filename}`);
+    const response = await fetch(path);
     if (!response.ok) {
-      throw new Error(`Failed to fetch ${filename}: ${response.statusText}`);
+      throw new Error(`HTTP error! status: ${response.status} at ${path}`);
     }
-    return await response.text();
+    const text = await response.text();
+    if (!text) {
+      throw new Error(`File ${filename} is empty`);
+    }
+    return text;
   } catch (error) {
-    console.error(`Error fetching ${filename}:`, error);
+    console.error(`Detailed Fetch Error for ${filename}:`, error);
+    // Return empty string so the app doesn't crash but shows loading or missing data
     return '';
   }
 };
@@ -65,6 +68,8 @@ export const fetchContent = async (filename: string): Promise<string> => {
  * Parses nested structures like projects and categories manually.
  */
 export const parseComplexMarkdown = (content: string, key: string) => {
+  if (!content) return { [key]: [], content: '' };
+  
   const { data, content: body } = parseMarkdown(content);
   
   if (key === 'projects') {

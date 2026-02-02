@@ -121,7 +121,7 @@ const Header: React.FC<HeaderProps> = ({ identity, roles }) => {
         ))}
       </div>
 
-      {/* Action Area: 2x2 Grid on Mobile, 4x1 on Desktop */}
+      {/* Action Area: 2x2 Grid of Buttons */}
       <div className="pt-4 space-y-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
           <a 
@@ -170,9 +170,9 @@ const Header: React.FC<HeaderProps> = ({ identity, roles }) => {
               href={identity.socials.twitter} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-xs text-text-muted hover:text-[#1DA1F2] transition-colors flex items-center gap-2.5 font-mono"
+              className="text-xs text-text-muted hover:text-[#1DA1F2] transition-colors flex items-center gap-2.5 font-mono group"
             >
-              <i className="fab fa-x-twitter"></i> Follow for updates
+              <i className="fab fa-x-twitter group-hover:scale-110 transition-transform"></i> Follow for updates
             </a>
           </div>
         )}
