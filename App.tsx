@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
@@ -23,12 +22,22 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
+        // Use separate try-catches to allow partial failure
+        const safeFetch = async (file: string) => {
+          try {
+            return await fetchContent(file);
+          } catch (e) {
+            console.error(`Error loading ${file}:`, e);
+            return '';
+          }
+        };
+
         const [idMd, aboutMd, projectsMd, techMd, certsMd] = await Promise.all([
-          fetchContent('identity.md'),
-          fetchContent('about.md'),
-          fetchContent('projects.md'),
-          fetchContent('tech-stack.md'),
-          fetchContent('certifications.md')
+          safeFetch('identity.md'),
+          safeFetch('about.md'),
+          safeFetch('projects.md'),
+          safeFetch('tech-stack.md'),
+          safeFetch('certifications.md')
         ]);
 
         const idParsed = parseMarkdown(idMd);
@@ -39,11 +48,11 @@ const App: React.FC = () => {
 
         const rawId = idParsed.data;
         const identity: Identity = {
-          name: rawId.name || '',
-          status: rawId.status || '',
-          location: rawId.location || '',
+          name: rawId.name || 'Saumyadip Jana',
+          status: rawId.status || 'Developer',
+          location: rawId.location || 'India',
           email: rawId.email || '',
-          pronouns: rawId.pronouns || '',
+          pronouns: rawId.pronouns || 'he/him',
           socials: {
             twitter: rawId.twitter || '',
             github: rawId.github || '',
@@ -54,15 +63,15 @@ const App: React.FC = () => {
         setData({
           identity,
           about: { 
-            roles: Array.isArray(aboutParsed.data.roles) ? aboutParsed.data.roles : [], 
-            bio: aboutParsed.content 
+            roles: Array.isArray(aboutParsed.data.roles) ? aboutParsed.data.roles : ["Developer"], 
+            bio: aboutParsed.content || "Welcome to my portfolio."
           },
           projects: projectsParsed.projects || [],
           techStack: techParsed.categories || [],
           certifications: certsParsed.certs || []
         });
       } catch (error) {
-        console.error("Error loading portfolio data:", error);
+        console.error("Critical error loading portfolio data:", error);
       } finally {
         setLoading(false);
       }
@@ -75,8 +84,8 @@ const App: React.FC = () => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-bg text-text-muted font-mono">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-2 border-text-muted border-t-transparent rounded-full animate-spin"></div>
-          <p>Initializing Environment...</p>
+          <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xs uppercase tracking-widest animate-pulse">Initializing Environment...</p>
         </div>
       </div>
     );
@@ -94,24 +103,31 @@ const App: React.FC = () => {
           <Bio bio={data.about?.bio || ''} />
         </section>
 
-        <section id="projects" className="scroll-mt-24">
-          <Projects projects={data.projects} />
-        </section>
+        {data.projects.length > 0 && (
+          <section id="projects" className="scroll-mt-24">
+            <Projects projects={data.projects} />
+          </section>
+        )}
 
-        <section id="tech" className="scroll-mt-24">
-          <TechStack stack={data.techStack} />
-        </section>
+        {data.techStack.length > 0 && (
+          <section id="tech" className="scroll-mt-24">
+            <TechStack stack={data.techStack} />
+          </section>
+        )}
 
-        <section id="certs" className="scroll-mt-24">
-          <Certifications certifications={data.certifications} />
-        </section>
+        {data.certifications.length > 0 && (
+          <section id="certs" className="scroll-mt-24">
+            <Certifications certifications={data.certifications} />
+          </section>
+        )}
 
         <section id="contact" className="scroll-mt-24">
           <Contact identity={data.identity} />
         </section>
 
-        <footer className="text-center text-xs text-text-muted mt-8 font-mono pb-12">
+        <footer className="text-center text-xs text-text-muted mt-8 font-mono pb-12 opacity-50">
           <p>&copy; {new Date().getFullYear()} {data.identity?.name || 'Saumyadip Jana'}</p>
+          <p className="mt-2 text-[10px]">Built with React & Gemini API</p>
         </footer>
       </main>
     </>

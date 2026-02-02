@@ -1,8 +1,8 @@
-
 /**
  * Simple parser for YAML frontmatter in Markdown files.
  */
 export const parseMarkdown = (content: string) => {
+  if (!content) return { data: {}, content: '' };
   const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
   const match = content.match(frontmatterRegex);
 
@@ -42,26 +42,44 @@ export const parseMarkdown = (content: string) => {
 
 /**
  * Fetches content from the local content directory.
- * Improved for GitHub Pages compatibility.
+ * Improved for GitHub Pages compatibility with subfolders.
  */
 export const fetchContent = async (filename: string): Promise<string> => {
-  // Use relative paths to ensure it works on username.github.io/repo-name/
-  const path = `./content/${filename}`;
-  try {
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status} at ${path}`);
+  // Determine base path to handle GitHub Pages subfolders automatically
+  const getBasePath = () => {
+    const fullPath = window.location.pathname;
+    // If we are on a project page like /portfolio/, this gets /portfolio/
+    const pathParts = fullPath.split('/');
+    // Remove the last part if it's index.html or empty
+    if (pathParts[pathParts.length - 1].includes('.') || pathParts[pathParts.length - 1] === '') {
+        pathParts.pop();
     }
-    const text = await response.text();
-    if (!text) {
-      throw new Error(`File ${filename} is empty`);
+    return pathParts.join('/') || '';
+  };
+
+  const basePath = getBasePath();
+  // Try two path strategies: absolute-relative and purely relative
+  const paths = [
+    `${basePath}/content/${filename}`.replace(/\/+/g, '/'),
+    `./content/${filename}`
+  ];
+
+  for (const path of paths) {
+    try {
+      console.log(`[ContentParser] Attempting to fetch: ${path}`);
+      const response = await fetch(path);
+      if (response.ok) {
+        const text = await response.text();
+        if (text && !text.includes('<!DOCTYPE html>')) { // Ensure we didn't get index.html back (common 404 behavior)
+          return text;
+        }
+      }
+    } catch (e) {
+      console.warn(`[ContentParser] Failed to fetch from ${path}:`, e);
     }
-    return text;
-  } catch (error) {
-    console.error(`Detailed Fetch Error for ${filename}:`, error);
-    // Return empty string so the app doesn't crash but shows loading or missing data
-    return '';
   }
+
+  throw new Error(`Could not load content for ${filename} from any attempted path.`);
 };
 
 /**
