@@ -1,7 +1,7 @@
 ---
 name: Saumyadip Jana
 status: Available for work
-location: Howrah, India
+location: Sabang, WB, India
 email: saumyadip.social@gmail.com
 pronouns: he/him
 socials:
