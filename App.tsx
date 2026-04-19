@@ -127,7 +127,6 @@ const App: React.FC = () => {
 
         <footer className="text-center text-xs text-text-muted mt-8 font-mono pb-12 opacity-50">
           <p>&copy; {new Date().getFullYear()} {data.identity?.name || 'Saumyadip Jana'}</p>
-          <p className="mt-2 text-[10px]">Built with React & Gemini API</p>
         </footer>
       </main>
     </>
