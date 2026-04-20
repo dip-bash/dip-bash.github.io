@@ -35,7 +35,7 @@ const Contact: React.FC<ContactProps> = ({ identity }) => {
             </a>
 
             {identity.socials.twitter && (
-              <a href={identity.socials.twitter} target="_blank" className="flex items-center gap-4 p-6 border border-border rounded-2xl bg-surface hover:border-[#1DA1F2]/30 transition-all group overflow-hidden relative">
+              <a href={identity.socials.twitter} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-6 border border-border rounded-2xl bg-surface hover:border-[#1DA1F2]/30 transition-all group overflow-hidden relative">
                 <div className="absolute top-0 right-0 p-3 opacity-[0.03] group-hover:opacity-10 transition-opacity">
                   <i className="fab fa-twitter text-6xl -rotate-12"></i>
                 </div>

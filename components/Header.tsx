@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({ identity, roles }) => {
               <i className={item.icon}></i>
             </div>
             {item.link ? (
-              <a href={item.link} target={item.link.startsWith('http') ? "_blank" : "_self"} className="hover:text-text-main transition-colors decoration-accent/30 underline-offset-4 truncate">
+              <a href={item.link} target={item.link.startsWith('http') ? "_blank" : "_self"} rel="noopener noreferrer" className="hover:text-text-main transition-colors decoration-accent/30 underline-offset-4 truncate">
                 {item.text}
               </a>
             ) : (

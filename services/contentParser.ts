@@ -23,6 +23,7 @@ export const parseMarkdown = (content: string) => {
     const colonIndex = line.indexOf(':');
     if (colonIndex !== -1) {
       const key = line.substring(0, colonIndex).trim();
+      if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
       const value = line.substring(colonIndex + 1).trim();
       
       // Handle empty or array brackets
