@@ -9,4 +9,9 @@ projects:
     description: Built a tmux-based desktop-like environment with an app launcher, system panel, and custom key bindings.
     github: https://github.com/dip-bash/cli-desk-env
     icon: fas fa-desktop
+    - title: suchi
+    description: Minimalist CLI clipboard manager for linux with searchable clipboard history, keyboard-driven navigation, and terminal-first workflow integration.
+    github: https://github.com/dip-bash/suchi
+    external: https://dip-bash.github.io/suchi/
+    icon: fas fa-clipboard
 ---
