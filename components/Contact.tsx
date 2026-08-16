@@ -12,9 +12,9 @@ const Contact: React.FC<ContactProps> = ({ identity }) => {
   return (
     <section id="contact" className="fade-in space-y-10">
       <div className="text-center max-w-xl mx-auto space-y-3">
-        <h2 className="text-3xl font-bold tracking-tight">Let's Collaborate</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Let's Talk</h2>
         <p className="text-text-muted leading-relaxed font-main">
-          Have a project in mind or just want to say hi? Feel free to reach out through any of the platforms below or send a direct message.
+          Whether you want to discuss a freelance project, an open engineering role, or just say hi feel free to reach out directly or via social media.
         </p>
       </div>
 
@@ -69,7 +69,7 @@ const Contact: React.FC<ContactProps> = ({ identity }) => {
                     <input 
                       type="text" 
                       name="name" 
-                      placeholder="e.g. John Doe" 
+                      placeholder="e.g. Rohan" 
                       required 
                       className="w-full bg-bg border border-border text-text-main p-4 rounded-xl font-main text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-[#333]"
                     />
@@ -79,7 +79,7 @@ const Contact: React.FC<ContactProps> = ({ identity }) => {
                     <input 
                       type="email" 
                       name="email" 
-                      placeholder="e.g. john@example.com" 
+                      placeholder="e.g. rohan@exmp.com" 
                       required 
                       className="w-full bg-bg border border-border text-text-main p-4 rounded-xl font-main text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-[#333]"
                     />
@@ -91,7 +91,7 @@ const Contact: React.FC<ContactProps> = ({ identity }) => {
                 <textarea 
                   name="message" 
                   rows={4} 
-                  placeholder="Tell me about your project..." 
+                  placeholder="..." 
                   required 
                   className="w-full bg-bg border border-border text-text-main p-4 rounded-xl font-main text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-[#333] resize-none"
                 ></textarea>

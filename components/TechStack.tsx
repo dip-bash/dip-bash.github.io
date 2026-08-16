@@ -8,14 +8,6 @@ interface TechStackProps {
 
 const getTechStyle = (name: string): { short: string, color: string } => {
   const styles: Record<string, { short: string, color: string }> = {
-    'Python': { short: 'Py', color: 'text-blue-400 group-hover:bg-blue-400/10 group-hover:border-blue-400/30' },
-    'Bash': { short: 'Sh', color: 'text-green-400 group-hover:bg-green-400/10 group-hover:border-green-400/30' },
-    'Linux': { short: 'Lx', color: 'text-yellow-400 group-hover:bg-yellow-400/10 group-hover:border-yellow-400/30' },
-    'Docker': { short: 'Dk', color: 'text-sky-400 group-hover:bg-sky-400/10 group-hover:border-sky-400/30' },
-    'Git': { short: 'Gt', color: 'text-orange-400 group-hover:bg-orange-400/10 group-hover:border-orange-400/30' },
-    'SQL': { short: 'Sq', color: 'text-indigo-400 group-hover:bg-indigo-400/10 group-hover:border-indigo-400/30' },
-    'Pandas': { short: 'Pd', color: 'text-purple-400 group-hover:bg-purple-400/10 group-hover:border-purple-400/30' },
-    'NumPy': { short: 'Np', color: 'text-blue-500 group-hover:bg-blue-500/10 group-hover:border-blue-500/30' },
   };
   
   return styles[name] || { 

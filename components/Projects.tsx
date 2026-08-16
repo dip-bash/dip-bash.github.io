@@ -10,7 +10,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   return (
     <section className="fade-in space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold tracking-tight">Selected Projects</h2>
+        <h2 className="text-2xl font-bold tracking-tight">Projects</h2>
         <div className="h-[1px] flex-1 bg-border mx-6 opacity-50"></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

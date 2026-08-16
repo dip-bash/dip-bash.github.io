@@ -172,7 +172,6 @@ const Header: React.FC<HeaderProps> = ({ identity, roles }) => {
               rel="noopener noreferrer" 
               className="text-xs text-text-muted hover:text-[#1DA1F2] transition-colors flex items-center gap-2.5 font-mono group"
             >
-              <i className="fab fa-x-twitter group-hover:scale-110 transition-transform"></i> Follow for updates
             </a>
           </div>
         )}
