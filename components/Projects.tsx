@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Project } from '../types';
+import { iconColor } from '../services/iconColor';
 
 interface ProjectsProps {
   projects: Project[];
@@ -14,17 +15,18 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         <div className="h-[1px] flex-1 bg-border mx-6 opacity-50"></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {projects.map((project, idx) => (
+        {projects.map((project, idx) => {
+          const c = iconColor(project.title);
+          return (
           <article 
             key={idx} 
             className="group relative project-card bg-surface border border-border p-7 rounded-2xl transition-all duration-300 overflow-hidden"
           >
-            {/* Subtle corner glow */}
-            <div className="absolute -top-12 -right-12 w-24 h-24 bg-accent/5 blur-2xl rounded-full group-hover:bg-accent/10 transition-colors"></div>
+            <div className="absolute -top-12 -right-12 w-24 h-24 blur-2xl rounded-full" style={{ backgroundColor: c.soft }}></div>
             
             <div className="relative flex justify-between items-start mb-5">
-              <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-bg border border-border group-hover:border-accent/30 transition-colors">
-                <i className={`${project.icon} text-xl text-accent group-hover:scale-110 transition-transform`}></i>
+              <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-bg" style={{ border: `1px solid ${c.border}` }}>
+                <i className={`${project.icon} text-xl group-hover:scale-110 transition-transform`} style={{ color: c.color }}></i>
               </div>
               <div className="flex gap-4 text-text-muted">
                 {project.github && (
@@ -49,7 +51,8 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               </p>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
