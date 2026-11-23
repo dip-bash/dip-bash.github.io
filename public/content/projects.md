@@ -1,9 +1,9 @@
 ---
 projects:
-  - title: Ananta
+  - title: T-Strip
     description: scrollable, tiling terminal multiplexer written in Go. Its columns form a horizontal canvas inspired by tiling-window-manager workflows.
-    github: https://github.com/dip-bash/ananta
-    external: https://dip-bash.github.io/ananta/
+    github: https://github.com/dip-bash/tstrip
+    external: https://t-strip.github.io/
     icon: fas fa-infinity
   - title: CAI - Command-line AI
     description: Built a CLI tool that explains man pages, analyzes command output, and suggests fixes using Gemini API.
