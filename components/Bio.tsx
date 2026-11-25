@@ -10,9 +10,10 @@ const Bio: React.FC<BioProps> = ({ bio }) => {
   const cleanBio = DOMPurify.sanitize(bio);
 
   return (
-    <section className="fade-in max-w-[650px]">
-      <div 
-        className="text-text-muted text-[1rem] leading-relaxed"
+    <section className="max-w-[680px] space-y-4">
+      <h2 className="text-xl font-medium tracking-tight text-text-main">About</h2>
+      <div
+        className="text-base leading-7 text-text-muted"
         dangerouslySetInnerHTML={{ __html: cleanBio }}
       />
     </section>

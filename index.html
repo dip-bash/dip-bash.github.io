@@ -5,24 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saumyadip Jana | Portfolio</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050505'/><text x='50' y='70' font-family='sans-serif' font-size='65' font-weight='bold' fill='%233b82f6' text-anchor='middle'>S</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230c0e0f'/><text x='50' y='70' font-family='sans-serif' font-size='65' font-weight='500' fill='%237fa9ff' text-anchor='middle'>S</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              bg: '#050505',
-              surface: '#0a0a0a',
-              'surface-hover': '#141414',
-              border: '#1f1f1f',
-              'text-main': '#ededed',
-              'text-muted': '#a3a3a3',
-              accent: '#3b82f6',
-              'accent-purple': '#a855f7',
-              'accent-pink': '#ec4899',
+              bg: '#0c0e0f',
+              surface: '#111416',
+              'surface-hover': '#171a1c',
+              border: '#292e31',
+              'text-main': '#eef0f1',
+              'text-muted': '#a5adb3',
+              'text-subtle': '#79838a',
+              accent: '#7fa9ff',
             },
             fontFamily: {
               main: ['Inter', 'sans-serif'],
@@ -34,85 +32,49 @@
     </script>
     <style>
       body {
-        background-color: #050505;
-        color: #ededed;
+        background-color: #0c0e0f;
+        color: #eef0f1;
         font-family: 'Inter', sans-serif;
-        position: relative;
         overflow-x: hidden;
       }
-      
-      body::before {
-        content: '';
-        position: fixed;
-        top: -10%;
-        left: -10%;
-        width: 40%;
-        height: 40%;
-        background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-        z-index: -1;
-        pointer-events: none;
-      }
-      body::after {
-        content: '';
-        position: fixed;
-        bottom: -10%;
-        right: -10%;
-        width: 50%;
-        height: 50%;
-        background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
-        z-index: -1;
-        pointer-events: none;
-      }
 
-      .fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
-      @keyframes fadeIn { to { opacity: 1; } }
-      
-      .cursor { 
-        display: inline-block; 
-        width: 8px; 
-        background-color: #3b82f6; 
-        animation: blink 1s infinite; 
-        margin-left: 4px; 
-      }
-      @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-      
       .highlight { 
-        color: #60a5fa; 
-        background: rgba(96, 165, 250, 0.1); 
-        padding: 2px 6px; 
-        border-radius: 4px; 
+        color: #a9c5ff;
+        background: rgba(127, 169, 255, 0.1);
+        padding: 4px 8px;
+        border-radius: 6px;
         font-size: 0.9em; 
         font-family: 'JetBrains Mono', monospace; 
       }
-      
-      .project-card:hover {
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.05);
-        border-color: rgba(59, 130, 246, 0.3);
+
+      a, button, input, textarea {
+        -webkit-tap-highlight-color: transparent;
       }
-      
+
+      :focus-visible {
+        outline: 2px solid #7fa9ff;
+        outline-offset: 3px;
+      }
+
+      ::selection {
+        color: #0c0e0f;
+        background: #7fa9ff;
+      }
+
       ::-webkit-scrollbar {
         width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #050505;
+        background: #0c0e0f;
       }
       ::-webkit-scrollbar-thumb {
-        background: #1f1f1f;
+        background: #292e31;
         border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #333;
+        background: #41494e;
       }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
 </head>
 <body>
     <div id="root"></div>

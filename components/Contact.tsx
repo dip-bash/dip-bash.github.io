@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { Identity } from '../types';
+import Icon from './Icon';
 
 interface ContactProps {
   identity: Identity | null;
@@ -9,103 +9,106 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = ({ identity }) => {
   if (!identity) return null;
 
+  const socialLinks = [
+    { label: 'GitHub', href: identity.socials.github, icon: 'github' },
+    { label: 'LinkedIn', href: identity.socials.linkedin, icon: 'linkedin' },
+    { label: 'X', href: identity.socials.twitter, icon: 'arrow-up-right' },
+  ].filter((link) => link.href);
+
   return (
-    <section id="contact" className="fade-in space-y-10">
-      <div className="text-center max-w-xl mx-auto space-y-3">
-        <h2 className="text-3xl font-bold tracking-tight">Let's Talk</h2>
-        <p className="text-text-muted leading-relaxed font-main">
-          Whether you want to discuss a freelance project, an open engineering role, or just say hi feel free to reach out directly or via social media.
+    <section className="space-y-8">
+      <div className="max-w-xl space-y-3">
+        <h2 className="text-xl font-medium tracking-tight text-text-main">Contact</h2>
+        <p className="text-base leading-7 text-text-muted">
+          Get in touch about a project, an engineering role, or anything else.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-12">
-        <div className="space-y-6">
-          <div className="space-y-4">
-            <a href={`mailto:${identity.email}`} className="flex items-center gap-4 p-6 border border-border rounded-2xl bg-surface hover:border-accent/30 transition-all group overflow-hidden relative">
-              <div className="absolute top-0 right-0 p-3 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-                <i className="fas fa-envelope text-6xl rotate-12"></i>
-              </div>
-              <div className="w-12 h-12 flex items-center justify-center border border-border rounded-xl bg-bg text-orange-400 text-xl group-hover:scale-110 transition-transform">
-                <i className="fas fa-at"></i>
-              </div>
-              <div className="relative">
-                <h3 className="text-sm font-bold">Email</h3>
-                <p className="text-xs text-text-muted mt-1 font-mono">{identity.email}</p>
-              </div>
-            </a>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.8fr_1.2fr]">
+        <div className="space-y-4">
+          <a
+            href={`mailto:${identity.email}`}
+            className="flex items-start gap-3 rounded-xl border border-border bg-surface p-4 transition-colors duration-150 hover:border-text-subtle"
+          >
+            <Icon name="mail" className="mt-1 h-5 w-5 shrink-0 text-accent" />
+            <span className="min-w-0">
+              <span className="block text-sm font-medium text-text-main">Email</span>
+              <span className="mt-1 block break-all text-sm text-text-muted">{identity.email}</span>
+            </span>
+          </a>
 
-            {identity.socials.twitter && (
-              <a href={identity.socials.twitter} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-6 border border-border rounded-2xl bg-surface hover:border-[#1DA1F2]/30 transition-all group overflow-hidden relative">
-                <div className="absolute top-0 right-0 p-3 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-                  <i className="fab fa-twitter text-6xl -rotate-12"></i>
-                </div>
-                <div className="w-12 h-12 flex items-center justify-center border border-border rounded-xl bg-bg text-[#1DA1F2] text-xl group-hover:scale-110 transition-transform">
-                  <i className="fab fa-twitter"></i>
-                </div>
-                <div className="relative">
-                  <h3 className="text-sm font-bold">X (Twitter)</h3>
-                  <p className="text-xs text-text-muted mt-1 font-mono">@dip_bash</p>
-                </div>
-              </a>
-            )}
+          <div className="rounded-xl border border-border bg-surface p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-text-main">
+              <Icon name="map" className="h-4 w-4 text-accent" />
+              {identity.location}
+            </div>
+            <p className="mt-2 text-sm text-text-muted">{identity.status}</p>
+          </div>
 
-            <div className="p-8 border border-border rounded-2xl bg-gradient-to-br from-accent/5 to-accent-purple/5 border-dashed relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent-purple rounded-2xl opacity-0 group-hover:opacity-10 blur transition duration-500"></div>
-                <h3 className="text-sm font-bold mb-2 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                    Current Location
-                </h3>
-                <p className="text-sm text-text-muted font-mono">{identity.location}</p>
-                <p className="text-[10px] text-[#404040] mt-4 uppercase tracking-[0.2em] font-bold">Open for Remote Roles</p>
+          {socialLinks.length > 0 && (
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-text-muted transition-colors duration-150 hover:text-accent"
+                >
+                  <Icon name={link.icon} className="h-4 w-4" />
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <form action="https://formspree.io/f/xnngkdnw" method="POST" className="space-y-4 rounded-xl border border-border bg-surface p-4 sm:p-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label htmlFor="contact-name" className="text-sm text-text-muted">Your name</label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                placeholder="Name"
+                required
+                className="w-full rounded-lg border border-border bg-bg px-3 py-3 text-sm text-text-main placeholder:text-text-subtle focus:border-accent focus:outline-none"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="contact-email" className="text-sm text-text-muted">Your email</label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+                className="w-full rounded-lg border border-border bg-bg px-3 py-3 text-sm text-text-main placeholder:text-text-subtle focus:border-accent focus:outline-none"
+              />
             </div>
           </div>
-        </div>
 
-        <div className="bg-surface border border-border p-8 rounded-3xl relative">
-          <form action="https://formspree.io/f/xnngkdnw" method="POST" className="space-y-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                    <label className="text-[10px] font-mono text-accent uppercase tracking-widest ml-1">Your Name</label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      placeholder="e.g. Rohan" 
-                      required 
-                      className="w-full bg-bg border border-border text-text-main p-4 rounded-xl font-main text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-[#333]"
-                    />
-                </div>
-                <div className="space-y-2">
-                    <label className="text-[10px] font-mono text-accent uppercase tracking-widest ml-1">Your Email</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      placeholder="e.g. rohan@exmp.com" 
-                      required 
-                      className="w-full bg-bg border border-border text-text-main p-4 rounded-xl font-main text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-[#333]"
-                    />
-                </div>
-            </div>
-            
-            <div className="space-y-2">
-                <label className="text-[10px] font-mono text-accent uppercase tracking-widest ml-1">Message</label>
-                <textarea 
-                  name="message" 
-                  rows={4} 
-                  placeholder="..." 
-                  required 
-                  className="w-full bg-bg border border-border text-text-main p-4 rounded-xl font-main text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-[#333] resize-none"
-                ></textarea>
-            </div>
-            
-            <button 
-              type="submit" 
-              className="w-full relative group overflow-hidden bg-white text-black py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-3 hover:shadow-xl hover:shadow-white/5 transition-all active:scale-[0.98]"
-            >
-              <span className="relative z-10">Send Direct Message</span>
-              <i className="fas fa-paper-plane text-[10px] relative z-10 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
-            </button>
-          </form>
-        </div>
+          <div className="space-y-2">
+            <label htmlFor="contact-message" className="text-sm text-text-muted">Message</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows={5}
+              placeholder="How can I help?"
+              required
+              className="w-full resize-y rounded-lg border border-border bg-bg px-3 py-3 text-sm text-text-main placeholder:text-text-subtle focus:border-accent focus:outline-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-medium text-bg transition-colors duration-150 hover:bg-[#a9c5ff]"
+          >
+            Send message
+            <Icon name="send" className="h-4 w-4" />
+          </button>
+        </form>
       </div>
     </section>
   );

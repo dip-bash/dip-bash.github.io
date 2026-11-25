@@ -82,11 +82,8 @@ const App: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-bg text-text-muted font-mono">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-xs uppercase tracking-widest animate-pulse">Initializing Environment...</p>
-        </div>
+      <div className="flex min-h-screen items-center justify-center bg-bg px-6 text-sm text-text-muted">
+        Loading portfolio...
       </div>
     );
   }
@@ -94,10 +91,8 @@ const App: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main id="home" className="max-w-[850px] mx-auto px-6 py-16 md:py-24 flex flex-col gap-20 md:gap-24 relative z-10">
-        <div className="pt-8 md:pt-12">
-          <Header identity={data.identity} roles={data.about?.roles || []} />
-        </div>
+      <main id="home" className="mx-auto flex max-w-[900px] flex-col gap-16 px-4 pb-16 pt-24 sm:px-8 md:gap-24">
+        <Header identity={data.identity} roles={data.about?.roles || []} />
         
         <section id="about" className="scroll-mt-24">
           <Bio bio={data.about?.bio || ''} />
@@ -125,7 +120,7 @@ const App: React.FC = () => {
           <Contact identity={data.identity} />
         </section>
 
-        <footer className="text-center text-xs text-text-muted mt-8 font-mono pb-12 opacity-50">
+        <footer className="border-t border-border pt-6 text-xs text-text-subtle">
           <p>&copy; {new Date().getFullYear()} {data.identity?.name || 'Saumyadip Jana'}</p>
         </footer>
       </main>
